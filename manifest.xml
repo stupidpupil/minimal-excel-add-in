@@ -12,6 +12,11 @@
   <DisplayName DefaultValue="Minimal Excel Add-In" />
   <Description DefaultValue="This is an extremely minimal Excel Add-in."/>
   <IconUrl DefaultValue="" />
+
+  <AppDomains>
+    <AppDomain>https://stupidpupil.github.io</AppDomain>
+  </AppDomains>
+
   <Hosts>
     <Host Name="Workbook" />
   </Hosts>
@@ -24,11 +29,36 @@
     <Hosts>
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
+
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="CommandsGroup">
+                <Label resid="CommandsGroup.Label"/>
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.SupertipTitle"/>
+                    <Description resid="TaskpaneButton.SupertipText"/>
+                  </Supertip>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+
         </DesktopFormFactor>
       </Host>
     </Hosts>
 
     <Resources>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://stupidpupil.github.io/minimal-excel-add-in/www/home.html"/>
+      </bt:Urls>
+
       <bt:ShortStrings>
         <bt:String id="CommandsGroup.Label" DefaultValue="Contoso Add-in"/>
         <bt:String id="TaskpaneButton.Label" DefaultValue="Hello world"/>
